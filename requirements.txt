@@ -7,3 +7,4 @@ langgraph
 reportlab
 pydantic
 huggingface_hub
+langchain_community
