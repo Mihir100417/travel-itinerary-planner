@@ -13,7 +13,7 @@ from langchain.llms import HuggingFaceHub
 # os.environ["HUGGINGFACEHUB_API_TOKEN"] = HUGGINGFACEHUB_API_TOKEN
 
 import streamlit as st
-HUGGINGFACEHUB_API_TOKEN = st.secrets["HUGGINGFACEHUB_API_TOKEN "]
+HUGGINGFACEHUB_API_TOKEN = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
 llm = HuggingFaceHub(
     repo_id="HuggingFaceH4/zephyr-7b-beta",
