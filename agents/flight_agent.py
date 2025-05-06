@@ -8,7 +8,7 @@ from tavily import TavilyClient
 client = TavilyClient(api_key=TAVILY_API_KEY)
 
 def flight_agent(state):
-    source = "Bangalore"
+    source = state.source
     destination = state.destination
     start_date = state.start_date
     end_date = state.end_date
