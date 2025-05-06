@@ -13,6 +13,7 @@ from agents.save_agent import save_agent
 def build_travel_graph():
 
     class TravelState(BaseModel):
+        source: str
         destination: str
         start_date: str
         end_date: str
