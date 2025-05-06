@@ -1,0 +1,9 @@
+openai
+langchain
+langchain-openai
+streamlit
+tavily-python
+langgraph
+reportlab
+pydantic
+huggingface_hub
