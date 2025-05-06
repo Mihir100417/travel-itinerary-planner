@@ -10,13 +10,14 @@ trip_end = trip_start + datetime.timedelta (days=5)
 
 st.title("✈️Travel Itinerary Planner🏖️")
 
+source = st.text_input("Source City", "Bangalore") 
 destination = st.text_input("Destination City", "Goa")
 start_date = st.date_input("Trip Start Date", value = trip_start)
 end_date = st.date_input("Trip End Date", value = trip_end)
 interests = st.multiselect("Your Interests", ["sightseeing", "food", "nature", "adventure", "history", "art", "temples", "beaches", "mountains", "forests"])
 
 if st.button("Generate Itinerary"):
-    if destination and start_date and end_date and interests:
+    if source and destination and start_date and end_date and interests:
         with st.spinner("Planning your dream trip..."):
             graph = build_travel_graph()
             initial_state = {
