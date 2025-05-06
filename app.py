@@ -3,7 +3,7 @@
 import streamlit as st
 from graphs.travel_graph import build_travel_graph
 import datetime
-from config import TAVILY_API_KEY, OPENAI_API_KEY, HUGGINGFACEHUB_API_TOKEN
+# from config import TAVILY_API_KEY, OPENAI_API_KEY, HUGGINGFACEHUB_API_TOKEN
 
 trip_start = datetime.date.today() + datetime.timedelta (days=1) 
 trip_end = trip_start + datetime.timedelta (days=5) 
