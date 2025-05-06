@@ -21,6 +21,7 @@ if st.button("Generate Itinerary"):
         with st.spinner("Planning your dream trip..."):
             graph = build_travel_graph()
             initial_state = {
+                "source": source,
                 "destination": destination,
                 "start_date": str(start_date),
                 "end_date": str(end_date),  
