@@ -1,6 +1,8 @@
 # agents/budget_agent.py
 from datetime import datetime
-from config import TAVILY_API_KEY
+# from config import TAVILY_API_KEY
+import streamlit as st
+TAVILY_API_KEY = st.secrets["TAVILY_API_KEY"]
 from tavily import TavilyClient
 
 client = TavilyClient(api_key=TAVILY_API_KEY)
