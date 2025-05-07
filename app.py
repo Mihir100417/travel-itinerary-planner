@@ -40,8 +40,8 @@ if st.button("Generate Itinerary"):
             st.subheader("🗺️ Suggested Itinerary")
             st.write(final_state["itinerary"])
 
-            st.subheader("💰 Estimated Budget")
-            st.success(f"Total Estimated Budget: **₹{final_state['budget_estimate']}**")
+            # st.subheader("💰 Estimated Budget")
+            # st.success(f"Total Estimated Budget: **₹{final_state['budget_estimate']}**")
 
             # print("Final state keys:", final_state.keys())
     
