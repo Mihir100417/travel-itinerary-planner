@@ -12,7 +12,7 @@ from reportlab.pdfgen import canvas
 def save_agent(state):
     destination = state.destination
     itinerary = state.itinerary
-    budget_estimate = state.budget_estimate
+    # budget_estimate = state.budget_estimate
 
     filename = f"{destination}_itinerary_planner.pdf"
 
