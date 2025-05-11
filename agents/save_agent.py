@@ -24,7 +24,7 @@ def save_agent(state):
     text_obj.setFont("Helvetica", 12)
 
     text_obj.textLine(f"Destination: {destination}")
-    text_obj.textLine(f"Estimated Budget: ${budget_estimate}")
+    # text_obj.textLine(f"Estimated Budget: ${budget_estimate}")
     text_obj.textLine("")
 
     text_obj.textLine("Travel Itinerary:")
