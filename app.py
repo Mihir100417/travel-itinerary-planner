@@ -4,22 +4,7 @@ import streamlit as st
 from graphs.travel_graph import build_travel_graph
 import datetime
 # from config import TAVILY_API_KEY, OPENAI_API_KEY, HUGGINGFACEHUB_API_TOKEN
-
-trip_start = datetime.date.today() + datetime.timedelta (days=1) 
-trip_end = trip_start + datetime.timedelta (days=5) 
-
-st.title("✈️Travel Itinerary Planner🏖️")
-
-source = st.text_input("Source City", "Bangalore") 
-destination = st.text_input("Destination City", "Goa")
-start_date = st.date_input("Trip Start Date", value = trip_start)
-end_date = st.date_input("Trip End Date", value = trip_end)
-interests = st.multiselect("Your Interests", ["sightseeing", "food", "nature", "adventure", "history", "art", "temples", "beaches", "mountains", "forests"])
-
-import streamlit as st
-from graphs.travel_graph import build_travel_graph
-import datetime
-
+ 
 trip_start = datetime.date.today() + datetime.timedelta(days=1)
 trip_end = trip_start + datetime.timedelta(days=5)
 
