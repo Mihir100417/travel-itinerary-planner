@@ -18,37 +18,40 @@ interests = st.multiselect("Your Interests", ["sightseeing", "food", "nature", "
 
 if st.button("Generate Itinerary"):
     if source and destination and start_date and end_date and interests:
-        with st.spinner("Planning your dream trip..."):
-            graph = build_travel_graph()
-            initial_state = {
-                "source": source,
-                "destination": destination,
-                "start_date": str(start_date),
-                "end_date": str(end_date),  
-                "interests": interests
-            }
-            final_state = graph.invoke(initial_state)
-
-            st.subheader("✈️ Flights (Top 5 Options)")
-            for flight in final_state["flights"]:
-                st.markdown(f"**{flight['title']}** - [View Details]({flight['link']})")
-
-            st.subheader("🏨 Hotels (Top 5 Options)")
-            for hotel in final_state["hotels"]:
-                st.markdown(f"**{hotel['name']}** - [View Details]({hotel['link']})")
-
-            st.subheader("🗺️ Suggested Itinerary")
-            st.write(final_state["itinerary"])
-
-            # st.subheader("💰 Estimated Budget")
-            # st.success(f"Total Estimated Budget: **₹{final_state['budget_estimate']}**")
-
-            # print("Final state keys:", final_state.keys())
+        if trip_end <= trip_start:
+            st.error("Trip End Date must be after Trip Start Date")
+        else:
+            with st.spinner("Planning your dream trip..."):
+                graph = build_travel_graph()
+                initial_state = {
+                    "source": source,
+                    "destination": destination,
+                    "start_date": str(start_date),
+                    "end_date": str(end_date),  
+                    "interests": interests
+                }
+                final_state = graph.invoke(initial_state)
     
-            # if "saved_file" in final_state:
-            #     with open(final_state["saved_file"], "rb") as f:
-            #         st.download_button("Download Itinerary", f, file_name=final_state["saved_file"])
-            # else:
-            #     st.error("PDF was not generated. 'saved_file' key not found in final state.")
+                st.subheader("✈️ Flights (Top 5 Options)")
+                for flight in final_state["flights"]:
+                    st.markdown(f"**{flight['title']}** - [View Details]({flight['link']})")
+    
+                st.subheader("🏨 Hotels (Top 5 Options)")
+                for hotel in final_state["hotels"]:
+                    st.markdown(f"**{hotel['name']}** - [View Details]({hotel['link']})")
+    
+                st.subheader("🗺️ Suggested Itinerary")
+                st.write(final_state["itinerary"])
+    
+                # st.subheader("💰 Estimated Budget")
+                # st.success(f"Total Estimated Budget: **₹{final_state['budget_estimate']}**")
+    
+                # print("Final state keys:", final_state.keys())
+        
+                # if "saved_file" in final_state:
+                #     with open(final_state["saved_file"], "rb") as f:
+                #         st.download_button("Download Itinerary", f, file_name=final_state["saved_file"])
+                # else:
+                #     st.error("PDF was not generated. 'saved_file' key not found in final state.")
     else:
         st.error("Please complete all fields before generating!")
