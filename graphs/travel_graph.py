@@ -44,6 +44,6 @@ def build_travel_graph():
     graph.add_edge("create_itinerary", END)
     # graph.set_finish_point("save_trip")
 
-    graph.set_finish_pount("create_itinerary")
+    graph.set_finish_point("create_itinerary")
     
     return graph.compile()
