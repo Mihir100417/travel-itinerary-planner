@@ -22,7 +22,13 @@ def build_travel_graph():
         hotels: Optional[List[Dict]] = []
         itinerary: Optional[List[Dict]] = []
         # budget_estimate: Optional[float] = None
-    
+
+    def start_node(state: TravelState) -> TravelState:
+    return state
+
+    def combine_node(state: TravelState) -> TravelState:
+    return state
+
     graph = StateGraph(TravelState)
 
     # Nodes
@@ -32,7 +38,13 @@ def build_travel_graph():
     # graph.add_node("calculate_budget", budget_agent)
     # graph.add_node("save_trip", save_agent)
 
-    # Edges
+    # Dummy branching node to initiate parallel tasks
+    def start_node(state: TravelState) -> TravelState:
+        return state
+
+    graph.add_node("start", start_node)  
+    graph.set_entry_point("start")        
+
     graph.set_entry_point("start")
 
     # Run flights and hotels in parallel
@@ -43,9 +55,6 @@ def build_travel_graph():
 
     graph.add_edge("find_flights", "combine")
     graph.add_edge("find_hotels", "combine")
-
-    def combine_node(state: TravelState) -> TravelState:
-        return state 
 
     graph.add_node("combine", combine_node)
 
