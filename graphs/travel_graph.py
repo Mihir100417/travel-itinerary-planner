@@ -33,14 +33,23 @@ def build_travel_graph():
     # graph.add_node("save_trip", save_agent)
 
     # Edges
-    graph.set_entry_point("find_flights")
+    graph.set_entry_point("start")
 
-    graph.add_edge("find_flights", "find_hotels")
-    graph.add_edge("find_hotels", "create_itinerary")
-    # graph.add_edge("create_itinerary", "calculate_budget")
-    # graph.add_edge("calculate_budget", "save_trip")
-    # graph.add_edge("create_itinerary","save_trip")
-    # graph.add_edge("save_trip", END)
+    # Run flights and hotels in parallel
+    graph.add_conditional_edges(
+        "start",
+        lambda state: {"find_flights", "find_hotels"}
+    )
+
+    graph.add_edge("find_flights", "combine")
+    graph.add_edge("find_hotels", "combine")
+
+    def combine_node(state: TravelState) -> TravelState:
+        return state 
+
+    graph.add_node("combine", combine_node)
+
+    graph.add_edge("combine", "create_itinerary")
     graph.add_edge("create_itinerary", END)
     # graph.set_finish_point("save_trip")
 
