@@ -44,11 +44,19 @@ def build_travel_graph():
 
     graph.set_entry_point("start")        
 
-    graph.add_parallel_edges("start", ["find_flights", "find_hotels"])
-
-    graph.add_edge("find_flights", "combine_results")
-    graph.add_edge("find_hotels", "combine_results")
+    # Define the parallel branches
+    parallel_branch = ParallelState(
+        {
+            "flights": flight_agent,
+            "hotels": hotel_agent,
+        }
+    )
     
+    graph.add_node("parallel_tasks", parallel_branch)
+    graph.add_edge("start", "parallel_tasks")
+
+    graph.add_edge("parallel_tasks", "combine_results")
+
     graph.add_edge("combine_results", "create_itinerary")
     graph.add_edge("create_itinerary", END)
     
