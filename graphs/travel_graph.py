@@ -45,23 +45,15 @@ def build_travel_graph():
     graph.add_node("start", start_node)  
     graph.set_entry_point("start")        
 
-    graph.set_entry_point("start")
-
-    # Run flights and hotels in parallel
-    graph.add_conditional_edges(
-        "start",
-        lambda state: {"find_flights", "find_hotels"}
-    )
-
+    graph.add_parallel_edges("start", ["find_flights", "find_hotels"])
+    
+    graph.add_node("combine", combine_node)
+    
     graph.add_edge("find_flights", "combine")
     graph.add_edge("find_hotels", "combine")
-
-    graph.add_node("combine", combine_node)
-
     graph.add_edge("combine", "create_itinerary")
     graph.add_edge("create_itinerary", END)
-    # graph.set_finish_point("save_trip")
-
+    
     graph.set_finish_point("create_itinerary")
     
     return graph.compile()
