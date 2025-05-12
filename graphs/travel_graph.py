@@ -24,10 +24,10 @@ def build_travel_graph():
         # budget_estimate: Optional[float] = None
 
     def start_node(state: TravelState) -> TravelState:
-    return state
+        return state
 
     def combine_node(state: TravelState) -> TravelState:
-    return state
+        return state
 
     graph = StateGraph(TravelState)
 
