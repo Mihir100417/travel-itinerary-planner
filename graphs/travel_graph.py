@@ -26,32 +26,30 @@ def build_travel_graph():
     def start_node(state: TravelState) -> TravelState:
         return state
 
-    def combine_node(state: TravelState) -> TravelState:
-        return state
+    def combine_results(state: TravelState, flights: Optional[List[Dict]] = None, hotels: Optional[List[Dict]] = None) -> TravelState:
+        updated_state = state.copy()
+        if flights:
+            updated_state.flights = flights
+        if hotels:
+            updated_state.hotels = hotels
+        return updated_state
 
     graph = StateGraph(TravelState)
 
-    # Nodes
+    graph.add_node("start", start_node)
     graph.add_node("find_flights", flight_agent)
     graph.add_node("find_hotels", hotel_agent)
+    graph.add_node("combine_results", combine_results)
     graph.add_node("create_itinerary", itinerary_agent)
-    # graph.add_node("calculate_budget", budget_agent)
-    # graph.add_node("save_trip", save_agent)
 
-    # Dummy branching node to initiate parallel tasks
-    def start_node(state: TravelState) -> TravelState:
-        return state
-
-    graph.add_node("start", start_node)  
     graph.set_entry_point("start")        
 
     graph.add_parallel_edges("start", ["find_flights", "find_hotels"])
+
+    graph.add_edge("find_flights", "combine_results")
+    graph.add_edge("find_hotels", "combine_results")
     
-    graph.add_node("combine", combine_node)
-    
-    graph.add_edge("find_flights", "combine")
-    graph.add_edge("find_hotels", "combine")
-    graph.add_edge("combine", "create_itinerary")
+    graph.add_edge("combine_results", "create_itinerary")
     graph.add_edge("create_itinerary", END)
     
     graph.set_finish_point("create_itinerary")
