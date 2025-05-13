@@ -13,6 +13,7 @@ def itinerary_agent(state):
     Focus on interests like {interests}.
     Keep it structured day-wise with a small description.
     Don't include budget and accomodation part anywhere.
+    Don't keep any plan on last date post lunch.
     """
     
     # prompt_char_count = len(prompt)
