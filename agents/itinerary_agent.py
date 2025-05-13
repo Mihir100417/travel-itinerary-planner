@@ -1,6 +1,7 @@
 # agents/itinerary_agent.py
 
 from llm import llm
+from datetime import datetime
 
 def itinerary_agent(state):
     destination = state.destination
@@ -8,8 +9,16 @@ def itinerary_agent(state):
     end_date = state.end_date
     interests = ", ".join(state.interests)
 
+    start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
+    end_date = datetime.strptime(end_date,"%Y-%m-%d").date()
+    time_difference = end_date - start_date
+
+    nights = time_difference.days
+    days = (time_difference.days) + 1
+
+
     prompt = f"""
-    Create a 5-day travel itinerary for a trip to {destination} from {start_date} to {end_date}.
+    Create a {days}-day travel itinerary for a trip to {destination} from {start_date} to {end_date}.
     Focus on interests like {interests}.
     Keep it structured day-wise with a small description.
     Don't include budget and accomodation part anywhere.
