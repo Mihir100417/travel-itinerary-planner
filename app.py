@@ -25,9 +25,10 @@ user_interest_description = st.text_area(
 )
 
 # Word count validation
-word_count = len(user_interest_description.split())
-if word_count > 50:
-    st.warning(f"Your description has {word_count} words. Please limit it to 50.")
+if user_interest_description:
+    word_count = len(user_interest_description.split())
+    if word_count > 50:
+        st.warning(f"Your description has {word_count} words. Please limit it to 50 words.")
 
 
 if st.button("Generate Itinerary"):
