@@ -26,6 +26,6 @@ def itinerary_agent(state):
     """
     
     # prompt_char_count = len(prompt)
-    response = llm(prompt)
+    response = llm.invoke(prompt)
     # return {"itinerary": response[prompt_char_count:]}
-    return {"itinerary": response.strip()}
+    return {"itinerary": response.content.strip()}
