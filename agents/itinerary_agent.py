@@ -20,12 +20,12 @@ def itinerary_agent(state):
     prompt = f"""
     Create a {days}-day travel itinerary for a trip to {destination} from {start_date} to {end_date}.
     Focus on interests like {interests}.
-    Keep it structured day-wise with a small description.
+    Keep it structured day-wise with a small description for each day.
     Don't include budget and accomodation part anywhere.
     Don't keep any plan on last date post lunch.
     """
     
     # prompt_char_count = len(prompt)
-    response = llm.invoke(prompt)
+    response = llm(prompt)
     # return {"itinerary": response[prompt_char_count:]}
-    return {"itinerary": response.content}
+    return {"itinerary": response.strip()}
