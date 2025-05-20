@@ -18,10 +18,10 @@ import streamlit as st
 HUGGINGFACEHUB_API_TOKEN = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
 llm = HuggingFaceHub(
-    repo_id="google/flan-t5-xl",
+    repo_id="HuggingFaceH4/zephyr-7b-beta",
     model_kwargs={
         "temperature": 0.3,
-        "max_new_tokens": 512,     # Optional: adjust based on your needs
-        "top_p": 0.95               # Optional: add diversity
+        "max_new_tokens": 512,  
+        "top_p": 0.95              
     }
 )
