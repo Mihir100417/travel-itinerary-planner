@@ -15,7 +15,7 @@ def build_travel_graph():
         destination: str
         start_date: str
         end_date: str
-        interests: Optional[List[str]] = [] 
+        interests: Optional[Union[List[str], str]] = None
         flights: Optional[List[Dict]] = []
         hotels: Optional[List[Dict]] = []
         itinerary: Optional[List[Dict]] = []
