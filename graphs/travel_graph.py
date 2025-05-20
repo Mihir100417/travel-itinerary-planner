@@ -1,7 +1,7 @@
 # graphs/travel_graph.py
 
 from pydantic import BaseModel
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Union
 from langgraph.graph import StateGraph, END
 
 from agents.flight_agent import flight_agent
