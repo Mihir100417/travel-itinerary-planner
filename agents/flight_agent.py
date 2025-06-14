@@ -28,10 +28,14 @@
     
 #     return {"flights": processed_flights[:5]}
 
-from config import AMADEUS_CLIENT_ID, AMADEUS_CLIENT_SECRET
+# from config import AMADEUS_CLIENT_ID, AMADEUS_CLIENT_SECRET
+import streamlit as st
 from amadeus import Client, ResponseError
 import re
 import pandas as pd
+
+AMADEUS_CLIENT_ID = st.secrets["AMADEUS_CLIENT_ID"]
+AMADEUS_CLIENT_SECRET = st.secrets["AMADEUS_CLIENT_SECRET"]
 
 amadeus = Client(
     client_id = AMADEUS_CLIENT_ID,
