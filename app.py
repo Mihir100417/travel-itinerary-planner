@@ -3,14 +3,14 @@
 import streamlit as st
 from graphs.travel_graph import build_travel_graph
 import datetime
+import pandas as pd
 
- 
 trip_start = datetime.date.today() + datetime.timedelta(days=1)
 trip_end = trip_start + datetime.timedelta(days=5)
 
 st.title("✈️ Travel Itinerary Planner 🏖️")
 
-source = st.text_input("Source City", "Bangalore")
+source = st.text_input("Source City", "Bengaluru")
 destination = st.text_input("Destination City", "Goa")
 start_date = st.date_input("Trip Start Date", value=trip_start)
 end_date = st.date_input("Trip End Date", value=trip_end)
@@ -29,6 +29,8 @@ if user_interest_description:
     word_count = len(user_interest_description.split())
     if word_count > 50:
         st.warning(f"Your description has {word_count} words. Please limit it to 50 words.")
+else:
+    word_count = 0
 
 
 if st.button("Generate Itinerary"):
@@ -59,9 +61,30 @@ if st.button("Generate Itinerary"):
             }
             final_state = graph.invoke(initial_state)
 
-            st.subheader("✈️ Flights (Top 5 Options)")
-            for flight in final_state["flights"]:
-                st.markdown(f"**{flight['title']}** - [View Details]({flight['link']})")
+            st.subheader("✈️ Flights (Top 5 Roundtrip Options)")
+
+            flights_df = pd.DataFrame(final_state["flights_data"])
+
+            for idx, row in flights_df.iterrows():
+                st.markdown(f"### ✈️ {row['carrier']} | ₹{row['price']}")
+                
+                # Outbound flight details
+                st.markdown("**🛫 Outbound Flight**")
+                col1, col2, col3, col4 = st.columns(4)
+                col1.markdown(f"**Departure:** {row['departure']}")
+                col2.markdown(f"**Arrival:** {row['arrival']}")
+                col3.markdown(f"**Duration:** {row['duration']}")
+                col4.markdown(f"**Stops:** {row['stops']}")
+
+                # Return flight details
+                st.markdown("**🛬 Return Flight**")
+                col1, col2, col3, col4 = st.columns(4)
+                col1.markdown(f"**Departure:** {row['Return_departure']}")
+                col2.markdown(f"**Arrival:** {row['Return_arrival']}")
+                col3.markdown(f"**Duration:** {row['Return_duration']}")
+                col4.markdown(f"**Stops:** {row['Return_stops']}")
+
+                st.markdown("---")
 
             st.subheader("🏨 Hotels (Top 5 Options)")
             for hotel in final_state["hotels"]:
@@ -69,4 +92,3 @@ if st.button("Generate Itinerary"):
 
             st.subheader("🗺️ Suggested Itinerary")
             st.write(final_state["itinerary"])
-
