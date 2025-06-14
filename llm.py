@@ -1,7 +1,7 @@
 from langchain_openai import ChatOpenAI
 import streamlit as st
-# OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
-from config import OPENAI_API_KEY
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+# from config import OPENAI_API_KEY
 
 llm = ChatOpenAI(
     openai_api_key = OPENAI_API_KEY,
