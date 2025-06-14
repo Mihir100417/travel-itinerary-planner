@@ -8,6 +8,7 @@ from agents.flight_agent import flight_agent
 from agents.hotel_agent import hotel_agent
 from agents.itinerary_agent import itinerary_agent
 
+
 def build_travel_graph():
 
     class TravelState(BaseModel):
@@ -16,7 +17,7 @@ def build_travel_graph():
         start_date: str
         end_date: str
         interests: Optional[Union[List[str], str]] = None
-        flights: Optional[List[Dict]] = []
+        flights_data: Optional[List[Dict]] = []
         hotels: Optional[List[Dict]] = []
         itinerary: Optional[List[Dict]] = []
     
