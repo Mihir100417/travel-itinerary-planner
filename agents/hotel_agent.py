@@ -4,7 +4,7 @@
 import streamlit as st
 from tavily import TavilyClient
 
-# client = TavilyClient(api_key=TAVILY_API_KEY)
+client = TavilyClient(api_key=TAVILY_API_KEY)
 TAVILY_API_KEY = st.secrets["TAVILY_API_KEY"]
 
 def hotel_agent(state):
